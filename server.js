@@ -10,7 +10,17 @@ mongoose.connect('mongodb://dilip:dilip123@dbh43.mlab.com:27437/chessdb', {useNe
 
 app.set('view engine','ejs')
 
+app.use(express.static('public'))
 
+var Chess = require('chess.js').Chess;
+var chess = new Chess();
+
+while (!chess.game_over()) {
+  var moves = chess.moves();
+  var move = moves[Math.floor(Math.random() * moves.length)];
+  chess.move(move);
+}
+console.log(chess.pgn());
 
 app.get('/', (req, res) =>{
     res.render('index',{data:{
