@@ -1,5 +1,5 @@
 const express = require('express')
-const  Chess = require('chess.js').Chess;
+// const  Chess = require('chess.js').Chess;
 const app = express()
 const server=require('http').createServer(app)
 const port = 3000
@@ -17,30 +17,28 @@ mongoose.connect('mongodb://dilip:dilip123@dbh43.mlab.com:27437/chessdb', {useNe
 
 
 //chess logic
-var chess = new Chess();
+// var chess = new Chess();
 
 
 //socket logic
 io.on('connection',(socket)=>{
     console.log('new user connected!');
-    socket.emit('sendBoard',{
-        'board':chess.fen()
+    socket.on('gameStatus',(obj)=>{
+      console.log(obj)
     });
 })
 
 
 app.get('/chess', (req, res) =>{
     // while (!chess.game_over()) {
-    var moves = chess.moves();
-    var move = moves[Math.floor(Math.random() * moves.length)];
-    chess.move(move);
-    var toPass=chess.fen();
-    //   }
-      // console.log(chess.pgn());
+    // var moves = chess.moves();
+    // var move = moves[Math.floor(Math.random() * moves.length)];
+    // chess.move(move);
+    // var toPass=chess.fen();
+    // //   }
+    //   // console.log(chess.pgn());
       
-    res.render('index',{chess:{
-        board:toPass,
-    }})
+    res.render('index')
 })
 
 server.listen(port, () => console.log(`Example app listening on port ${port}!`))
