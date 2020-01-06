@@ -24,12 +24,12 @@ io.on('connection', (socket) => {
 
     socket.on('send game', (state) => {
         console.log(state);
-        socket.emit('new game', {state:state});
+        io.sockets.emit('new game',state);
     });
-    socket.on('update status', (state) => {
-        console.log(state);
-        socket.emit('new update', {state:state});
-    });
+    // socket.on('update status', (state) => {
+    //     console.log(state);
+    //     socket.emit('new update', {state:state});
+    // });
 
     socket.on('disconnect', () => {
         connections.splice(connections.indexOf(socket));
