@@ -26,10 +26,6 @@ io.on('connection', (socket) => {
         console.log(state);
         io.sockets.emit('new game',state);
     });
-    // socket.on('update status', (state) => {
-    //     console.log(state);
-    //     socket.emit('new update', {state:state});
-    // });
 
     socket.on('disconnect', () => {
         connections.splice(connections.indexOf(socket));
@@ -39,7 +35,7 @@ io.on('connection', (socket) => {
 
 
 app.get('/chess', (req, res) => {
-    res.render('index')
+    res.render('pages/index')
 })
 
 server.listen(port, () => console.log(`Example app listening on port ${port}!`))
